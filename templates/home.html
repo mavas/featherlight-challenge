@@ -11,6 +11,7 @@
         return true;
     }
 
+    /** https://stackoverflow.com/questions/46155/how-to-validate-an-email-address-in-javascript */
 	function validateEmail(email) {
 		var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 		return re.test(String(email).toLowerCase());
@@ -23,6 +24,7 @@
     <p>Username: <input id='username' name="username">
     <div id="username_error"></div>
     <p>Email: <input id="email" name="email">
+    <div id="email_error"></div>
     <p>Password: <input id="password" name="password">
     <p>Confirm password: <input id="confirm_password" name="confirm_password">
     <div id="password_error"></div>
@@ -34,27 +36,47 @@
     /** An event handler for whenever any of the fields change. */
 	//var form = document.querySelector('form');
 	featherlight_form.addEventListener('change', function() {
+        username_valid = false;
+        email_valid = false;
+        passwords_valid = false;
+
         // Check the username length.
         let username = document.getElementById('username');
         if (username.value.length <= 15) {
             document.getElementById("username_error").innerHTML = "Username field needs to be greater than 15 characters.";
+            username_valid = false;
         } else {
             document.getElementById("username_error").innerHTML = "";
+            username_valid = true;
         }
+
+        // Validate email address.
         let email = document.getElementById('email');
-        console.log("Hat: " + validateEmail(email.value));
+        if (!validateEmail(email.value)) {
+            document.getElementById("email_error").innerHTML = "Please enter a valid email.";
+            email_valid = false;
+        } else {
+            document.getElementById("email_error").innerHTML = "";
+            email_valid = true;
+        }
 
         // Check that the passwords match
         let password1 = document.getElementById('password');
         let password2 = document.getElementById('confirm_password');
         if (password1.value != password2.value) {
             document.getElementById("password_error").innerHTML = "The password fields need to be the same.";
+            passwords_valid = false;
         } else {
             document.getElementById("password_error").innerHTML = "";
+            passwords_valid = true;
         }
 
         // Activate the submit button when everything is ok.
-		document.getElementById('submit_button').disabled = false;
+        if (username_valid && email_valid && passwords_valid) {
+            document.getElementById('submit_button').disabled = false;
+        } else {
+            document.getElementById('submit_button').disabled = true;
+        }
 	});
 </script>
 </center>
