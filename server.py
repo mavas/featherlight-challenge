@@ -1,4 +1,10 @@
+"""
+Author: David Kilgore
+"""
+
+
 import string
+import re
 
 from flask import Flask, request, Response, render_template
 
@@ -28,7 +34,13 @@ def hello_world():
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
-    return render_template('./home.html')
+    d = request.form
+    if 'username' in d:
+        if len(d['username']) < 15:
+            m = re.match(r'^$', d['email'])
+            if m:
+                print('yes')
+    return render_template('home.html')
 
 
 if __name__ == '__main__':
