@@ -1,6 +1,6 @@
 import string
 
-from flask import Flask, request, Response
+from flask import Flask, request, Response, render_template
 
 
 app = Flask(__name__)
@@ -24,6 +24,11 @@ def hello_world():
                 fh.write(encoded)
             return Response({'EncodedMessage': encoded}, status=200, mimetype='application/json')
     return Response('', status=500)
+
+
+@app.route('/', methods=['GET'])
+def home():
+    return render_template('./home.html')
 
 
 if __name__ == '__main__':
