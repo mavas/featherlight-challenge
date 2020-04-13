@@ -18,15 +18,18 @@
     <p>Username: <input id='username' name="username">
     <div id="username_error"></div>
     <p>Email: <input name="email">
-    <p>Password: <input name="password">
-    <p>Confirm password: <input name="confirm_password">
+    <p>Password: <input id="password" name="password">
+    <p>Confirm password: <input id="confirm_password" name="confirm_password">
+    <div id="password_error"></div>
     <p><input type="submit" value="submit" id="submit_button" disabled>
 </form>
 <script type="text/javascript">
     featherlight_form = document.forms.featherlight;
 
+    /** An event handler for whenever any of the fields change. */
 	//var form = document.querySelector('form');
 	featherlight_form.addEventListener('change', function() {
+        // Check the username length.
         let username = document.getElementById('username');
         if (username.value.length <= 15) {
             document.getElementById("username_error").innerHTML = "Username field needs to be greater than 15 characters.";
@@ -34,6 +37,18 @@
             document.getElementById("username_error").innerHTML = "";
         }
 
+        // Check that the passwords match
+        let password1 = document.getElementById('password');
+        let password2 = document.getElementById('confirm_password');
+        console.log("Password: " + password1.value);
+        console.log("Password: " + password2.value);
+        if (password1.value != password2.value) {
+            document.getElementById("password_error").innerHTML = "The password fields need to be the same.";
+        } else {
+            document.getElementById("password_error").innerHTML = "";
+        }
+
+        // Activate the submit button when everything is ok.
 		document.getElementById('submit_button').disabled = false;
 	});
 </script>
