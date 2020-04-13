@@ -10,6 +10,11 @@
         }
         return true;
     }
+
+	function validateEmail(email) {
+		var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+		return re.test(String(email).toLowerCase());
+	}
 </script>
 </head>
 <body>
@@ -17,7 +22,7 @@
 <form method="post" name="featherlight" onsubmit="return validate()">
     <p>Username: <input id='username' name="username">
     <div id="username_error"></div>
-    <p>Email: <input name="email">
+    <p>Email: <input id="email" name="email">
     <p>Password: <input id="password" name="password">
     <p>Confirm password: <input id="confirm_password" name="confirm_password">
     <div id="password_error"></div>
@@ -36,12 +41,12 @@
         } else {
             document.getElementById("username_error").innerHTML = "";
         }
+        let email = document.getElementById('email');
+        console.log("Hat: " + validateEmail(email.value));
 
         // Check that the passwords match
         let password1 = document.getElementById('password');
         let password2 = document.getElementById('confirm_password');
-        console.log("Password: " + password1.value);
-        console.log("Password: " + password2.value);
         if (password1.value != password2.value) {
             document.getElementById("password_error").innerHTML = "The password fields need to be the same.";
         } else {
