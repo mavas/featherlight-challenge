@@ -1,6 +1,6 @@
 import string
 
-from flask import Flask, request
+from flask import Flask, request, Response
 
 
 app = Flask(__name__)
@@ -19,9 +19,11 @@ def hello_world():
     if request.is_json:
         data = request.json
         if 'Shift' in data and 'Message' in data:
-            return caesar(data['Message'], data['Shift'])
-    #rval = {'EncodedMessage': rval}
-    return 'Hello, World!'
+            encoded = caesar(data['Message'], data['Shift'])
+            with open("/tmp/featherlight", 'w') as fh:
+                fh.write(encoded)
+            return Response({'EncodedMessage': encoded}, status=200, mimetype='application/json')
+    return Response('', status=500)
 
 
 if __name__ == '__main__':
