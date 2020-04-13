@@ -28,14 +28,13 @@
 	//var form = document.querySelector('form');
 	featherlight_form.addEventListener('change', function() {
         let username = document.getElementById('username');
-        if (username.value <= 15) {
-            alert("Username field");
-            document.getElementById("username_error").innerHTML = "something to do";
-            return false;
+        if (username.value.length <= 15) {
+            document.getElementById("username_error").innerHTML = "Username field needs to be greater than 15 characters.";
+        } else {
+            document.getElementById("username_error").innerHTML = "";
         }
 
-		submitButton = document.getElementById('submit_button');
-        submitButton.disabled = false;
+		document.getElementById('submit_button').disabled = false;
 	});
 </script>
 </center>
