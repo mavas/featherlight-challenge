@@ -2,7 +2,7 @@ from flask import Flask
 app = Flask(__name__)
 
 
-@app.route('/')
+@app.route('/api/encode/', methods=['POST'])
 def hello_world():
     return 'Hello, World!'
 

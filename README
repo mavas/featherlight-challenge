@@ -1,1 +1,6 @@
 Featherlight challenge
+
+
+Looks like one might want to use a tool like curl to test the server:
+
+curl -XPOST -d "{'Shift': 2, 'Message': 'I love you'}"
