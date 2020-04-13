@@ -26,7 +26,7 @@ def hello_world():
     return Response('', status=500)
 
 
-@app.route('/', methods=['GET'])
+@app.route('/', methods=['GET', 'POST'])
 def home():
     return render_template('./home.html')
 
