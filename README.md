@@ -1,5 +1,4 @@
-Featherlight challenge
-
+# Featherlight challenge
 
 Looks like one might want to use a tool like curl to test the server:
 
