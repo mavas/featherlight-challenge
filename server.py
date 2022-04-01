@@ -1,8 +1,3 @@
-"""
-Author: David Kilgore
-"""
-
-
 import string
 import re
 
